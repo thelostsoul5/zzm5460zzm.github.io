@@ -1,0 +1,562 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java | The Lost Soul</title>
+  <meta name="author" content="周自敏">
+  
+  <meta name="description" content="java,c++,javascript,css;Talk is cheap,show me the code!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="The Lost Soul"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <meta name="baidu-site-verification" content="upjuYNBc3u" />
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="The Lost Soul" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">The Lost Soul</a></h1>
+  <h2><a href="/">饿，呆。</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/little-book">LittleBook</a></li>
+    
+      <li><a href="/archives">目录</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">java</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-19T13:16:29.000Z"><a href="/2015/04/19/究竟Java是传值还是传参？/">Apr 19 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/04/19/究竟Java是传值还是传参？/">究竟Java是传值还是传引用？</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>直到今天看了<a href="http://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value">这个</a>我才知道以前对这个问题一直是一知半解。虽然如果想模仿C++写一个swap函数，就必须将参数包装成类，但是我一直以为对象就是引用。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/04/19/究竟Java是传值还是传参？/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2015/04/19/究竟Java是传值还是传参？/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-08T15:39:30.000Z"><a href="/2014/11/08/java-util/">Nov 8 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/08/java-util/">java.util的结构</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <img src="http://i.imgbox.com/hQ5SV3ri.jpg" width="890" title="java.util.*,unknow"><!--想使用fancybox的话，链接必须是直达图片的，不能是mapping-->
+
+      
+    </div>
+    <footer>
+      
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/11/08/java-util/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-07T13:14:23.000Z"><a href="/2014/10/07/Class/">Oct 7 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/07/Class/">对Java反射机制——Class类的理解</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>学习Java有一段时间了，自然接触过Java反射机制，让是理解得不是很清晰，总觉得：如果我要初始化一个对象的话，直接new不就行了，何必绕一圈。直到看到“动态加载”，这不就是先前一直实现不了的吗？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dynamic</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Object o = <span class="keyword">new</span> Class(args[<span class="number">0</span>]).newInstance();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类似上面这样的类加载就是动态加载，不是硬编译在程序中的，使用的就是这种有点绕的初始化方式。但是如果你接触过框架，应该可以很快的做出反应，框架的很多方面都是反射实现的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/10/07/Class/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-07T13:04:07.000Z"><a href="/2014/10/07/Java-Native-Interfacce/">Oct 7 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/07/Java-Native-Interfacce/">简单讲讲JNI</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前段时间了解了Android NDK，也就是用c编写Android App以提高执行效率，好奇于它的实现原理，所以学习了JNI（Java Native Interface）。从Java 1.1开始，JNI标准成为java平台的一部分，它允许Java代码和其他语言写的代码进行交互。JNI一开始是为了本地已编译语言，尤其是C和C++而设计 的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。下面以经典的HelloWorld程序简单的讲一讲JNI：
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/10/07/Java-Native-Interfacce/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/10/07/Java-Native-Interfacce/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-24T09:27:00.000Z"><a href="/2014/08/24/2014-08-24-pattern-descriptor/">Aug 24 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/24/2014-08-24-pattern-descriptor/">装饰者模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在《Head First设计模式》中它被描述为：“给爱用继承的人一个全新的设计眼界”，这个模式很好的结合了继承和组合各自的优点，特别是组合，”一旦你熟悉了装饰的技巧，你将能够在不修改任何底层代码的请况下，给你的（或别人的）对象赋予新的职责。”<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/24/2014-08-24-pattern-descriptor/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/08/24/2014-08-24-pattern-descriptor/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-28T14:52:00.000Z"><a href="/2014/05/28/2014-05-28-spring-beans/">May 28 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/28/2014-05-28-spring-beans/">Spring beans</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Spring beans 全部标签和属性
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/05/28/2014-05-28-spring-beans/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/05/28/2014-05-28-spring-beans/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-21T15:56:00.000Z"><a href="/2014/05/21/2014-05-21-find-the-first-diff/">May 21 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/21/2014-05-21-find-the-first-diff/">笔试题：从文件中找到第一个只出现一次的字符</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>从文件（longstr.txt）读入一个超长的字符串（以\0结束）（字符串长度N，N&gt;=1,N<2^32 - 1），请输出字符串中第一个只出现一次的字符和它的位置。
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INPUT</span></span><br><span class="line">abbacd</span><br><span class="line"></span><br><span class="line"><span class="keyword">OUTPUT</span></span><br><span class="line">c <span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/05/21/2014-05-21-find-the-first-diff/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/05/21/2014-05-21-find-the-first-diff/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-20T01:57:00.000Z"><a href="/2014/04/20/2014-04-20-thinking-in-java/">Apr 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/20/2014-04-20-thinking-in-java/">关于继承</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近纠结一个问题：java中，使用继承时，“允许直接访问变量”和“使用继承的方法访问变量”哪种方式更好？举个例子更形象些：<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/04/20/2014-04-20-thinking-in-java/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/04/20/2014-04-20-thinking-in-java/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-31T12:04:00.000Z"><a href="/2014/03/31/2014-03-31-natual-merge-in-java/">Mar 31 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/31/2014-03-31-natual-merge-in-java/">Java实现自然合并排序</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>鉴于网上的自然合并排序程序比较少，用Java实现的更少，把自己用Java实现的NatualMergeSort贴在这里避免重复造轮子。不知性能如何，有请大神帮忙分析分析。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/31/2014-03-31-natual-merge-in-java/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/03/31/2014-03-31-natual-merge-in-java/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-26T06:37:00.000Z"><a href="/2014/03/26/2014-03-26-innerclass/">Mar 26 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/26/2014-03-26-innerclass/">匿名内部类解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前段时间做了一个安卓的小应用，发现了如下的线程用法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread() &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			soundPoolMap.put(<span class="number">0</span>,mSoundPool.load(context,R.raw.sound_1,<span class="number">1</span>));</span><br><span class="line">			soundPoolMap.put(<span class="number">1</span>,mSoundPool.load(context,R.raw.sound_2,<span class="number">1</span>));</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p>让我想起了匿名内部类。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/26/2014-03-26-innerclass/#more" class="more-link">展开</a>
+          </div>
+        
+        <div class="alignright">
+          <a href="http://thelostsoul.xyz/2014/03/26/2014-03-26-innerclass/#ds-thread" class="comment-link">Comments</a>
+        </div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+    <a href="/categories/java/page/2/" class="alignright next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com/s" method="get" accept-charset="utf-8">
+    <input type="search" name="q1" results="0" placeholder="搜索">
+    <input type="hidden" name="q6" value="thelostsoul.xyz">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/04/19/究竟Java是传值还是传参？/">究竟Java是传值还是传引用？</a>
+      </li>
+    
+      <li>
+        <a href="/2015/04/03/Google-Common-Lisp-风格指南/">Google Common Lisp 风格指南</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/09/Cookie-Session/">Cookie &amp; Session</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/09/关于Linux中文乱码/">关于Linux中文乱码</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/08/使用-Autowired等标签的注意事项/">使用Autowired等标签的注意事项</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/css/">css</a><small>1</small></li>
+  
+    <li><a href="/categories/docker/">docker</a><small>1</small></li>
+  
+    <li><a href="/categories/jquery/easyui/">easyui</a><small>1</small></li>
+  
+    <li><a href="/categories/eclipse/">eclipse</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>2</small></li>
+  
+    <li><a href="/categories/git/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/jquery/easyui/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/java/">java</a><small>14</small></li>
+  
+    <li><a href="/categories/jquery/">jquery</a><small>1</small></li>
+  
+    <li><a href="/categories/jsp/">jsp</a><small>4</small></li>
+  
+    <li><a href="/categories/lisp/">lisp</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags//" style="font-size: 10px;"><%! %></a><a href="/tags/Autowired/" style="font-size: 10px;">Autowired</a><a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a><a href="/tags/JNI/" style="font-size: 10px;">JNI</a><a href="/tags/Linux/" style="font-size: 10px;">Linux</a><a href="/tags/SensorEventListener/" style="font-size: 10px;">SensorEventListener</a><a href="/tags/Session/" style="font-size: 10px;">Session</a><a href="/tags/Spring/" style="font-size: 10px;">Spring</a><a href="/tags/action-form/" style="font-size: 10px;">action_form</a><a href="/tags/beans/" style="font-size: 10px;">beans</a><a href="/tags/docker/" style="font-size: 10px;">docker</a><a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a><a href="/tags/java/" style="font-size: 10px;">java</a><a href="/tags/java核心/" style="font-size: 10px;">java核心</a><a href="/tags/lisp/" style="font-size: 10px;">lisp</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/push/" style="font-size: 10px;">push</a><a href="/tags/remember/" style="font-size: 10px;">remember</a><a href="/tags/util/" style="font-size: 10px;">util</a><a href="/tags/上传/" style="font-size: 10px;">上传</a><a href="/tags/乱码/" style="font-size: 20px;">乱码</a><a href="/tags/传参/" style="font-size: 10px;">传参</a><a href="/tags/侧边栏/" style="font-size: 10px;">侧边栏</a><a href="/tags/匿名内部类/" style="font-size: 10px;">匿名内部类</a><a href="/tags/反射/" style="font-size: 10px;">反射</a><a href="/tags/发现/" style="font-size: 20px;">发现</a><a href="/tags/合并排序/" style="font-size: 10px;">合并排序</a><a href="/tags/备份/" style="font-size: 10px;">备份</a><a href="/tags/多态/" style="font-size: 10px;">多态</a><a href="/tags/安装/" style="font-size: 10px;">安装</a><a href="/tags/悬浮收放/" style="font-size: 10px;">悬浮收放</a><a href="/tags/标签/" style="font-size: 10px;">标签</a><a href="/tags/笔试题/" style="font-size: 20px;">笔试题</a><a href="/tags/继承/" style="font-size: 10px;">继承</a><a href="/tags/装饰者/" style="font-size: 10px;">装饰者</a><a href="/tags/转换/" style="font-size: 10px;">转换</a><a href="/tags/静动包含/" style="font-size: 10px;">静动包含</a><a href="/tags/风格/" style="font-size: 10px;">风格</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">微博</h3>
+  <div id="weibo">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=1&isFans=1&uid=2705744264&verifier=b60ec1d3&dpc=1"></iframe>
+  </div>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 周自敏
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.lug.ustc.edu.cn/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

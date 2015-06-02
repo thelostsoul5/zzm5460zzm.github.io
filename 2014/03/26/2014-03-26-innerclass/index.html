@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>匿名内部类解析 | The Lost Soul</title>
+  <meta name="author" content="周自敏">
+  
+  <meta name="description" content="java,c++,javascript,css;Talk is cheap,show me the code!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="匿名内部类解析"/>
+  <meta property="og:site_name" content="The Lost Soul"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <meta name="baidu-site-verification" content="upjuYNBc3u" />
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="The Lost Soul" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">The Lost Soul</a></h1>
+  <h2><a href="/">饿，呆。</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/little-book">LittleBook</a></li>
+    
+      <li><a href="/archives">目录</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-26T06:37:00.000Z"><a href="/2014/03/26/2014-03-26-innerclass/">Mar 26 2014</a></time>
+      
+      
+  
+    <h1 class="title">匿名内部类解析</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前段时间做了一个安卓的小应用，发现了如下的线程用法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread() &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			soundPoolMap.put(<span class="number">0</span>,mSoundPool.load(context,R.raw.sound_1,<span class="number">1</span>));</span><br><span class="line">			soundPoolMap.put(<span class="number">1</span>,mSoundPool.load(context,R.raw.sound_2,<span class="number">1</span>));</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p>让我想起了匿名内部类。<a id="more"></a></p>
+<p>其实在框架里面，匿名内部类这样的应用很常见。但是我记忆中的匿名内部类只能是继承抽象类或实现一个接口，可是Thread不是一个抽象类也不是一个接口啊。怎么回事？难道记错了？？？</p>
+<p>接下来我翻了一些资料也Google了一下，发现好像没有错啊，莫非是理解错误！！！</p>
+<p>不行，只能自己做实验了。我新建了一个最简单的类，注意是“类”，然后在一个测试类的main方法中用匿名内部类的方法覆盖了原setter方法，之后调用getter方法，你猜怎么着？这样是可以成功的。</p>
+<p>所以说，是我理解错误，不应该是有一部分人理解错误。比较准确的定义是：匿名内部类是基于继承和实现的，当你使用匿名内部类时，也就意味着你继承了那个类或实现了那个接口。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/java/">java</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/匿名内部类/">匿名内部类</a>
+  </div>
+
+        
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2014/03/31/2014-03-31-natual-merge-in-java/" class="alignleft prev" >上一篇</a>
+    
+    
+    <a href="/2014/03/20/2014-03-20-an-android-app/" class="alignright next" >下一篇</a>
+    
+    <div class="clearfix"></div>
+</nav>
+<section id="comment">
+  <!-- Duoshuo Comment BEGIN -->
+  <a name="ds-thread"></a>
+  <div class="ds-thread"></div>
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzm5460"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- Duoshuo Comment END -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com/s" method="get" accept-charset="utf-8">
+    <input type="search" name="q1" results="0" placeholder="搜索">
+    <input type="hidden" name="q6" value="thelostsoul.xyz">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/04/19/究竟Java是传值还是传参？/">究竟Java是传值还是传引用？</a>
+      </li>
+    
+      <li>
+        <a href="/2015/04/03/Google-Common-Lisp-风格指南/">Google Common Lisp 风格指南</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/09/Cookie-Session/">Cookie &amp; Session</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/09/关于Linux中文乱码/">关于Linux中文乱码</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/08/使用-Autowired等标签的注意事项/">使用Autowired等标签的注意事项</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/css/">css</a><small>1</small></li>
+  
+    <li><a href="/categories/docker/">docker</a><small>1</small></li>
+  
+    <li><a href="/categories/jquery/easyui/">easyui</a><small>1</small></li>
+  
+    <li><a href="/categories/eclipse/">eclipse</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>2</small></li>
+  
+    <li><a href="/categories/git/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/jquery/easyui/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/java/">java</a><small>14</small></li>
+  
+    <li><a href="/categories/jquery/">jquery</a><small>1</small></li>
+  
+    <li><a href="/categories/jsp/">jsp</a><small>4</small></li>
+  
+    <li><a href="/categories/lisp/">lisp</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags//" style="font-size: 10px;"><%! %></a><a href="/tags/Autowired/" style="font-size: 10px;">Autowired</a><a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a><a href="/tags/JNI/" style="font-size: 10px;">JNI</a><a href="/tags/Linux/" style="font-size: 10px;">Linux</a><a href="/tags/SensorEventListener/" style="font-size: 10px;">SensorEventListener</a><a href="/tags/Session/" style="font-size: 10px;">Session</a><a href="/tags/Spring/" style="font-size: 10px;">Spring</a><a href="/tags/action-form/" style="font-size: 10px;">action_form</a><a href="/tags/beans/" style="font-size: 10px;">beans</a><a href="/tags/docker/" style="font-size: 10px;">docker</a><a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a><a href="/tags/java/" style="font-size: 10px;">java</a><a href="/tags/java核心/" style="font-size: 10px;">java核心</a><a href="/tags/lisp/" style="font-size: 10px;">lisp</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/push/" style="font-size: 10px;">push</a><a href="/tags/remember/" style="font-size: 10px;">remember</a><a href="/tags/util/" style="font-size: 10px;">util</a><a href="/tags/上传/" style="font-size: 10px;">上传</a><a href="/tags/乱码/" style="font-size: 20px;">乱码</a><a href="/tags/传参/" style="font-size: 10px;">传参</a><a href="/tags/侧边栏/" style="font-size: 10px;">侧边栏</a><a href="/tags/匿名内部类/" style="font-size: 10px;">匿名内部类</a><a href="/tags/反射/" style="font-size: 10px;">反射</a><a href="/tags/发现/" style="font-size: 20px;">发现</a><a href="/tags/合并排序/" style="font-size: 10px;">合并排序</a><a href="/tags/备份/" style="font-size: 10px;">备份</a><a href="/tags/多态/" style="font-size: 10px;">多态</a><a href="/tags/安装/" style="font-size: 10px;">安装</a><a href="/tags/悬浮收放/" style="font-size: 10px;">悬浮收放</a><a href="/tags/标签/" style="font-size: 10px;">标签</a><a href="/tags/笔试题/" style="font-size: 20px;">笔试题</a><a href="/tags/继承/" style="font-size: 10px;">继承</a><a href="/tags/装饰者/" style="font-size: 10px;">装饰者</a><a href="/tags/转换/" style="font-size: 10px;">转换</a><a href="/tags/静动包含/" style="font-size: 10px;">静动包含</a><a href="/tags/风格/" style="font-size: 10px;">风格</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">微博</h3>
+  <div id="weibo">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=1&isFans=1&uid=2705744264&verifier=b60ec1d3&dpc=1"></iframe>
+  </div>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 周自敏
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.lug.ustc.edu.cn/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

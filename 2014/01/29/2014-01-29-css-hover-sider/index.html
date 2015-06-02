@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>纯css悬浮收放sider（侧边栏） | The Lost Soul</title>
+  <meta name="author" content="周自敏">
+  
+  <meta name="description" content="java,c++,javascript,css;Talk is cheap,show me the code!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="纯css悬浮收放sider（侧边栏）"/>
+  <meta property="og:site_name" content="The Lost Soul"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <meta name="baidu-site-verification" content="upjuYNBc3u" />
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="The Lost Soul" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">The Lost Soul</a></h1>
+  <h2><a href="/">饿，呆。</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/little-book">LittleBook</a></li>
+    
+      <li><a href="/archives">目录</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-29T07:14:00.000Z"><a href="/2014/01/29/2014-01-29-css-hover-sider/">Jan 29 2014</a></time>
+      
+      
+  
+    <h1 class="title">纯css悬浮收放sider（侧边栏）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>安装了一个新的<strong>octopress</strong>主题后，发现新的主题没有侧边栏。<a id="more"></a>其实这很好解决，只需要在<code>index</code>、<code>_include\page</code>、<code>_include\post</code>等你需要<strong>sider</strong>的地方添加：<br><figure class="highlight html"><figcaption><span>这里为了转义在“&#123;&#125;”和“%”之间添加了空格，复制代码后需除去</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123; % unless page.sidebar == false % &#125;</span><br><span class="line"><span class="tag">&lt;<span class="title">aside</span> <span class="attribute">class</span>=<span class="value">"sidebar"</span>&gt;</span></span><br><span class="line">  &#123; % if site.post_asides.size % &#125;</span><br><span class="line">    &#123; % include_array post_asides % &#125;</span><br><span class="line">  &#123; % else % &#125;</span><br><span class="line">    &#123; % include_array default_asides % &#125;</span><br><span class="line">  &#123; % endif % &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="title">aside</span>&gt;</span></span><br><span class="line">&#123; % endunless % &#125;</span><br><span class="line">``` </span><br><span class="line">关键是sider的样式。既然本来就没有那就任我为所欲为了，哈哈……</span><br><span class="line">首先，要先跟主题相呼应，所以格式应该相同；其次，我想让sider悬浮并且自动靠边收放。要实现这样的效果，至少有两种方式：javascript、css。我选择css，因为需要更改的地方少而且效果更佳，方便又实惠。</span><br><span class="line">思考过程：</span><br><span class="line">首先，需要让sider在鼠标悬浮于之上时弹出且当鼠标在它之上时不缩回，需要设置（响应式设计）：</span><br><span class="line">``` css</span><br><span class="line">.sidebar&#123; right:0%; &#125;</span><br><span class="line">.sidebar:hover&#123; right:0%; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后……你猜对了，就是设置sider的初始位置和弹出效果：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.sidebar</span><span class="rules">&#123; </span><br><span class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">bottom</span>:<span class="value"><span class="number">0</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">right</span>:<span class="value">-<span class="number">31%</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">32%</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">transition</span>:<span class="value"><span class="number">0.2s</span> ease-out</span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"><span class="number">0.2s</span> ease-out</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>大概就是这样，具体代码如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="class">.mid-col</span> <span class="class">.mid-col-container</span> <span class="class">.sidebar</span><span class="rules">&#123; <span class="rule"><span class="attribute">right</span>:<span class="value"><span class="number">0%</span></span></span>; &#125;</span></span><br><span class="line"><span class="class">.container</span> <span class="class">.mid-col</span> <span class="class">.mid-col-container</span> <span class="rule"><span class="attribute">.sidebar</span>:<span class="value">hover&#123; right:<span class="number">0%</span></span></span>; &#125;</span><br><span class="line"><span class="tag">body</span> &gt; <span class="class">.container</span> <span class="class">.mid-col</span> <span class="class">.mid-col-container</span> <span class="class">.sidebar</span><span class="rules">&#123; </span><br><span class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">bottom</span>:<span class="value"><span class="number">0</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">right</span>:<span class="value">-<span class="number">31%</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">32%</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#3D4349</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">transition</span>:<span class="value"><span class="number">0.2s</span> ease-out</span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"><span class="number">0.2s</span> ease-out</span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">8060</span></span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">overflow-x</span>:<span class="value"> hidden</span></span>; </span><br><span class="line">	<span class="rule"><span class="attribute">overflow-y</span>:<span class="value"> scroll</span></span>; </span><br><span class="line">&#125;</span></span><br><span class="line"><span class="tag">body</span> &gt; <span class="class">.container</span> <span class="class">.mid-col</span> <span class="class">.mid-col-container</span> <span class="class">.sidebar</span> <span class="tag">section</span> <span class="tag">ul</span> <span class="tag">a</span><span class="rules">&#123; </span><br><span class="line">	<span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#FFF</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value">color <span class="number">0.3s</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">-moz-transition</span>:<span class="value">color <span class="number">0.3s</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">-o-transition</span>:<span class="value">color <span class="number">0.3s</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">transition</span>:<span class="value">color <span class="number">0.3s</span></span></span>; </span><br><span class="line">&#125;</span></span><br><span class="line"><span class="tag">body</span> &gt; <span class="class">.container</span> <span class="class">.mid-col</span> <span class="class">.mid-col-container</span> <span class="class">.sidebar</span> <span class="tag">section</span> <span class="tag">ul</span> <span class="rule"><span class="attribute">a</span>:<span class="value">hover&#123;</span><br><span class="line"> 	color:<span class="hexcolor">#258fb8</span></span></span>; </span><br><span class="line">&#125;<span class="tag">li</span><span class="rules">&#123; </span><br><span class="line"> 	<span class="rule"><span class="attribute">font-weight</span>:<span class="value">normal</span></span>; </span><br><span class="line"> 	<span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">10px</span></span></span>; </span><br><span class="line"> &#125;</span></span><br><span class="line"><span class="tag">body</span> &gt; <span class="class">.container</span> <span class="class">.mid-col</span> <span class="class">.mid-col-container</span> <span class="class">.sidebar</span> <span class="tag">section</span><span class="rules">&#123;</span><br><span class="line"> 	<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">80%</span></span></span>;</span><br><span class="line"> 	<span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">20%</span> <span class="number">15%</span> <span class="number">20%</span> <span class="number">15%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是：</p>
+<ul>
+<li>设置sider处于最高层，即设置<code>z-index</code>为最大</li>
+<li>设置<code>overflow-x</code>为hidden和<code>overflow-y</code>为scroll，去掉页面的横向移动</li>
+<li>设置所有上层div的<code>height</code>为100%和sider的<code>bottom</code>为0，让sider悬浮在屏幕右边</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/css/">css</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/侧边栏/">侧边栏</a>, <a href="/tags/悬浮收放/">悬浮收放</a>
+  </div>
+
+        
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2014/01/30/2014-01-30-git-pullandpush/" class="alignleft prev" >上一篇</a>
+    
+    
+    <a href="/2014/01/12/2014-01-12-garbled/" class="alignright next" >下一篇</a>
+    
+    <div class="clearfix"></div>
+</nav>
+<section id="comment">
+  <!-- Duoshuo Comment BEGIN -->
+  <a name="ds-thread"></a>
+  <div class="ds-thread"></div>
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzm5460"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- Duoshuo Comment END -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com/s" method="get" accept-charset="utf-8">
+    <input type="search" name="q1" results="0" placeholder="搜索">
+    <input type="hidden" name="q6" value="thelostsoul.xyz">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/04/19/究竟Java是传值还是传参？/">究竟Java是传值还是传引用？</a>
+      </li>
+    
+      <li>
+        <a href="/2015/04/03/Google-Common-Lisp-风格指南/">Google Common Lisp 风格指南</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/09/Cookie-Session/">Cookie &amp; Session</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/09/关于Linux中文乱码/">关于Linux中文乱码</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/08/使用-Autowired等标签的注意事项/">使用Autowired等标签的注意事项</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/css/">css</a><small>1</small></li>
+  
+    <li><a href="/categories/docker/">docker</a><small>1</small></li>
+  
+    <li><a href="/categories/jquery/easyui/">easyui</a><small>1</small></li>
+  
+    <li><a href="/categories/eclipse/">eclipse</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>2</small></li>
+  
+    <li><a href="/categories/git/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/jquery/easyui/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/java/">java</a><small>14</small></li>
+  
+    <li><a href="/categories/jquery/">jquery</a><small>1</small></li>
+  
+    <li><a href="/categories/jsp/">jsp</a><small>4</small></li>
+  
+    <li><a href="/categories/lisp/">lisp</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags//" style="font-size: 10px;"><%! %></a><a href="/tags/Autowired/" style="font-size: 10px;">Autowired</a><a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a><a href="/tags/JNI/" style="font-size: 10px;">JNI</a><a href="/tags/Linux/" style="font-size: 10px;">Linux</a><a href="/tags/SensorEventListener/" style="font-size: 10px;">SensorEventListener</a><a href="/tags/Session/" style="font-size: 10px;">Session</a><a href="/tags/Spring/" style="font-size: 10px;">Spring</a><a href="/tags/action-form/" style="font-size: 10px;">action_form</a><a href="/tags/beans/" style="font-size: 10px;">beans</a><a href="/tags/docker/" style="font-size: 10px;">docker</a><a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a><a href="/tags/java/" style="font-size: 10px;">java</a><a href="/tags/java核心/" style="font-size: 10px;">java核心</a><a href="/tags/lisp/" style="font-size: 10px;">lisp</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/push/" style="font-size: 10px;">push</a><a href="/tags/remember/" style="font-size: 10px;">remember</a><a href="/tags/util/" style="font-size: 10px;">util</a><a href="/tags/上传/" style="font-size: 10px;">上传</a><a href="/tags/乱码/" style="font-size: 20px;">乱码</a><a href="/tags/传参/" style="font-size: 10px;">传参</a><a href="/tags/侧边栏/" style="font-size: 10px;">侧边栏</a><a href="/tags/匿名内部类/" style="font-size: 10px;">匿名内部类</a><a href="/tags/反射/" style="font-size: 10px;">反射</a><a href="/tags/发现/" style="font-size: 20px;">发现</a><a href="/tags/合并排序/" style="font-size: 10px;">合并排序</a><a href="/tags/备份/" style="font-size: 10px;">备份</a><a href="/tags/多态/" style="font-size: 10px;">多态</a><a href="/tags/安装/" style="font-size: 10px;">安装</a><a href="/tags/悬浮收放/" style="font-size: 10px;">悬浮收放</a><a href="/tags/标签/" style="font-size: 10px;">标签</a><a href="/tags/笔试题/" style="font-size: 20px;">笔试题</a><a href="/tags/继承/" style="font-size: 10px;">继承</a><a href="/tags/装饰者/" style="font-size: 10px;">装饰者</a><a href="/tags/转换/" style="font-size: 10px;">转换</a><a href="/tags/静动包含/" style="font-size: 10px;">静动包含</a><a href="/tags/风格/" style="font-size: 10px;">风格</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">微博</h3>
+  <div id="weibo">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=1&isFans=1&uid=2705744264&verifier=b60ec1d3&dpc=1"></iframe>
+  </div>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 周自敏
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.lug.ustc.edu.cn/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
